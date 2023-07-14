@@ -1,28 +1,69 @@
-# Custom Travel Itinerary Creator
+# Travel Itinerary Generator
 
-This is a Python application that uses the OpenAI API to generate a custom travel itinerary based on user input. The user can specify their preferred destination, type of accommodation, activities, food, and budget. 
+This is a Flask-based web application that uses the OpenAI GPT-3.5 model to generate custom travel itineraries based on user preferences.
 
-## Installation
+## Setup
 
-1. Clone this repository.
-2. Install the required Python dependencies by running `pip install -r requirements.txt` in the root directory of the repository.
+1. Clone the repository:
+
+\```bash
+git clone https://github.com/yourusername/travel-itinerary-generator.git
+cd travel-itinerary-generator
+\```
+
+2. Set up a Python virtual environment and install the required dependencies:
+
+\```bash
+make env
+\```
+
+3. Create an environment variable for your OpenAI API key:
+
+\```bash
+export OPENAI_API_KEY=your-openai-api-key
+\```
+
+Replace `your-openai-api-key` with your actual OpenAI API key.
 
 ## Usage
 
-Run the application by executing `python app/main.py` in the root directory of the repository.
+1. Activate the virtual environment:
 
-## Repository Structure
+\```bash
+source venv/bin/activate
+\```
 
-The repository contains the following files and directories:
+2. Run the Flask application:
 
-- `app/`: This directory contains the main application code.
-  - `models/`: This directory contains the data models.
-    - `user.py`: This file defines the User class, which includes attributes for user preferences.
-    - `itinerary.py`: This file defines the Itinerary class, which includes attributes for a travel itinerary.
-  - `services/`: This directory contains the service classes.
-    - `openai_service.py`: This file defines the OpenAIService class, which interacts with the OpenAI API.
-  - `main.py`: This file includes the main application logic.
-- `tests/`: This directory should contain unit tests for the application (currently not implemented).
-- `.gitignore`: This file specifies what files and directories Git should ignore.
-- `README.md`: This markdown file contains information about the project and instructions for usage.
-- `requirements.txt`: This file lists the Python dependencies needed to run the application.
+\```bash
+export FLASK_APP=app/main.py
+flask run
+\```
+
+The Flask server will start, and you can access the application at `http://localhost:5000`.
+
+3. To generate a travel itinerary, navigate to `http://localhost:5000` in your web browser. Enter your travel preferences in the form and click the "Generate Itinerary" button. The generated itinerary will be displayed on the page.
+
+4. To stop the Flask application, press `Ctrl+C` in the terminal.
+
+5. To deactivate the virtual environment:
+
+\```bash
+deactivate
+\```
+
+6. To clean up the environment (deactivate and delete the virtual environment):
+
+\```bash
+make clean
+\```
+
+## Details
+
+This application uses the OpenAI GPT-3.5 model to generate custom travel itineraries. The user's preferences are used to generate a prompt, which is passed to the GPT-3.5 model via the OpenAI API. The model generates a response, which is parsed and displayed as the custom travel itinerary.
+
+This project is a demonstration of how OpenAI's powerful GPT-3.5 model can be used to create practical applications. The generated itineraries are for demonstration purposes and may not be entirely accurate or realistic.
+
+## Disclaimer
+
+This project is not affiliated with, sponsored by, or endorsed by OpenAI.

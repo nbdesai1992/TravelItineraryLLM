@@ -1,30 +1,33 @@
+from flask import Flask, request, render_template
 from models.user import User
 from models.itinerary import Itinerary
 from services.openai_service import OpenAIService
 
-def main():
-    while True:
-        print("\n1. Create a custom travel itinerary")
-        print("2. Exit")
-        choice = input("Enter your choice: ")
+app = Flask(__name__)
 
-        if choice == '1':
-            user = User.from_input()
-            itinerary_details = OpenAIService.generate_itinerary(str(user))
-            
-            if itinerary_details is not None:
-                itinerary = Itinerary.from_dict(itinerary_details)
-                print("\nYour custom itinerary is as follows:")
-                print(itinerary)
-            else:
-                print("\nUnable to create itinerary. Please try again.")
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
-        elif choice == '2':
-            print("\nGoodbye!")
-            break
+@app.route('/generate', methods=['POST'])
+def generate_itinerary():
+    location = request.form.get('location')
+    days = request.form.get('days')
+    budget = request.form.get('budget')
+    activities = request.form.get('activities')
+    cuisine = request.form.get('cuisine')
 
-        else:
-            print("\nInvalid choice. Please try again.")
+    user = User(location=location, days=days, budget=budget, activities=activities, cuisine=cuisine)
+
+    service = OpenAIService()
+    itinerary_details = service.generate_itinerary(user.preferences)
+
+    if itinerary_details is None:
+        return "Error: Could not generate itinerary. Please check your input and try again."
+
+    itinerary = itinerary_details
+    return render_template('index.html', itinerary=itinerary)
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
+

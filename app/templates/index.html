@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Travel Itinerary Generator</title>
+</head>
+<body>
+    <h1>Travel Itinerary Generator</h1>
+    <form action="/generate" method="post">
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location"><br>
+        <label for="days">Number of Days:</label><br>
+        <input type="text" id="days" name="days"><br>
+        <label for="budget">Budget (in US Dollars):</label><br>
+        <input type="text" id="budget" name="budget"><br>
+        <label for="activities">Activities (separated by comma):</label><br>
+        <input type="text" id="activities" name="activities"><br>
+        <label for="cuisine">Cuisine Preferences (separated by comma):</label><br>
+        <input type="text" id="cuisine" name="cuisine"><br>
+        <input type="submit" value="Generate Itinerary">
+    </form>
+    {% if itinerary %}
+    <h2>Your Custom Itinerary</h2>
+    <p>{{ itinerary }}</p>
+    {% endif %}
+</body>
+</html>

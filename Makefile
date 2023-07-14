@@ -8,4 +8,8 @@ activate:
 	@echo "Run 'source venv/bin/activate' to activate the virtual environment"
 
 clean:
+	# check if the venv is activated
+	if [ -n "$$VIRTUAL_ENV" ]; then \
+		deactivate; \
+	fi
 	rm -rf venv
