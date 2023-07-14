@@ -1,13 +1,14 @@
 import openai
 import json
+import os
 
-openai.api_key = 'your-api-key'
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 class OpenAIService:
     @staticmethod
     def generate_itinerary(user_preferences):
         prompt = f"A custom travel itinerary based on the following preferences: {user_preferences}"
-        
+        print(prompt)
         response = openai.Completion.create(
           engine="text-davinci-002",
           prompt=prompt,
@@ -19,6 +20,7 @@ class OpenAIService:
         try:
             details = json.loads(response.choices[0].text.strip())
         except json.JSONDecodeError:
+            print(response)
             print("Error: The response from the OpenAI API is not in valid JSON format.")
             return None
 

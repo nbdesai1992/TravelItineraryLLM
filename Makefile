@@ -1,5 +1,11 @@
-.PHONY: env
+.PHONY: env activate clean
 
 env:
-	py -m venv venv
-	venv\Scripts\activate && pip install -r requirements.txt
+	python3 -m venv venv
+	. venv/bin/activate && pip install -r requirements.txt
+
+activate:
+	@echo "Run 'source venv/bin/activate' to activate the virtual environment"
+
+clean:
+	rm -rf venv
