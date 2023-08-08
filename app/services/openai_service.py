@@ -3,9 +3,11 @@ import openai
 import json
 
 class KeyManager:
-    def get_api_key(self, keyName):
-        d = json.load('keys/currentKeys.json')
-        return d[keyName]
+    def get_api_key(self, key_name):
+        with open('keys/currentKeys.json', 'r') as f:
+            d = json.load(f)
+        return d[key_name]
+
 
 class OpenAIService:
 

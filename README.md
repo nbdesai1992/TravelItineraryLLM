@@ -33,11 +33,10 @@ Replace `your-openai-api-key` with your actual OpenAI API key.
 source venv/bin/activate
 \```
 
-2. Run the Flask application:
+2. Run the Flask application from the repository root:
 
 \```bash
-export FLASK_APP=app/main.py
-flask run
+python app/main.py
 \```
 
 The Flask server will start, and you can access the application at `http://localhost:5000`.
