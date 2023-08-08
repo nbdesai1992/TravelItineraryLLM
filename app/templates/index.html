@@ -2,25 +2,60 @@
 <html lang="en">
 <head>
     <title>Travel Itinerary Generator</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Travel Itinerary Generator</h1>
-    <form action="/generate" method="post">
-        <label for="location">Location:</label><br>
-        <input type="text" id="location" name="location"><br>
-        <label for="days">Number of Days:</label><br>
-        <input type="text" id="days" name="days"><br>
-        <label for="budget">Budget (in US Dollars):</label><br>
-        <input type="text" id="budget" name="budget"><br>
-        <label for="activities">Activities (separated by comma):</label><br>
-        <input type="text" id="activities" name="activities"><br>
-        <label for="cuisine">Cuisine Preferences (separated by comma):</label><br>
-        <input type="text" id="cuisine" name="cuisine"><br>
-        <input type="submit" value="Generate Itinerary">
-    </form>
-    {% if itinerary %}
-    <h2>Your Custom Itinerary</h2>
-    <p>{{ itinerary }}</p>
-    {% endif %}
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="mb-4 text-center">Travel Itinerary Generator</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/" method="post">
+                            <div class="form-group">
+                                <label for="location">Location:</label>
+                                <input type="text" class="form-control" id="location" name="location" value="{{ request.form['location'] }}" placeholder="Enter destination...">
+                            </div>
+                            <div class="form-group">
+                                <label for="days">Number of Days:</label>
+                                <input type="number" class="form-control" id="days" name="days" value="{{ request.form['days'] }}" placeholder="Number of days...">
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Budget (in US Dollars):</label>
+                                <input type="number" class="form-control" id="budget" name="budget" value="{{ request.form['budget'] }}" placeholder="Your budget...">
+                            </div>
+                            <div class="form-group">
+                                <label for="activities">Activities (separated by comma):</label>
+                                <input type="text" class="form-control" id="activities" name="activities" value="{{ request.form['activities'] }}" placeholder="e.g. Hiking, Museum, Beach...">
+                            </div>
+                            <div class="form-group">
+                                <label for="cuisine">Cuisine Preferences (separated by comma):</label>
+                                <input type="text" class="form-control" id="cuisine" name="cuisine" value="{{ request.form['cuisine'] }}" placeholder="e.g. Italian, Vegan...">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-block" value="Generate Itinerary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% if itinerary %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Your Custom Itinerary
+                    </div>
+                    <div class="card-body">
+                        <p>{{ itinerary }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and its dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
