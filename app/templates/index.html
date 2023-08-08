@@ -4,34 +4,41 @@
     <title>Travel Itinerary Generator</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .underlined {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="container py-5">
+        <h1 class="mb-4 text-center">Travel Itinerary Generator</h1>
         <div class="row justify-content-center">
+
+            <!-- Form Column -->
             <div class="col-md-6">
-                <h1 class="mb-4 text-center">Travel Itinerary Generator</h1>
                 <div class="card">
                     <div class="card-body">
                         <form action="/" method="post">
                             <div class="form-group">
                                 <label for="location">Location:</label>
-                                <input type="text" class="form-control" id="location" name="location" value="{{ request.form['location'] }}" placeholder="Enter destination...">
+                                <input type="text" class="form-control" id="location" name="location" value="{{ request.form['location'] or '' }}" placeholder="Enter destination...">
                             </div>
                             <div class="form-group">
                                 <label for="days">Number of Days:</label>
-                                <input type="number" class="form-control" id="days" name="days" value="{{ request.form['days'] }}" placeholder="Number of days...">
+                                <input type="number" class="form-control" id="days" name="days" value="{{ request.form['days'] or '' }}" placeholder="Number of days...">
                             </div>
                             <div class="form-group">
                                 <label for="budget">Budget (in US Dollars):</label>
-                                <input type="number" class="form-control" id="budget" name="budget" value="{{ request.form['budget'] }}" placeholder="Your budget...">
+                                <input type="number" class="form-control" id="budget" name="budget" value="{{ request.form['budget'] or '' }}" placeholder="Your budget...">
                             </div>
                             <div class="form-group">
                                 <label for="activities">Activities (separated by comma):</label>
-                                <input type="text" class="form-control" id="activities" name="activities" value="{{ request.form['activities'] }}" placeholder="e.g. Hiking, Museum, Beach...">
+                                <input type="text" class="form-control" id="activities" name="activities" value="{{ request.form['activities'] or '' }}" placeholder="e.g. Hiking, Museum, Beach...">
                             </div>
                             <div class="form-group">
                                 <label for="cuisine">Cuisine Preferences (separated by comma):</label>
-                                <input type="text" class="form-control" id="cuisine" name="cuisine" value="{{ request.form['cuisine'] }}" placeholder="e.g. Italian, Vegan...">
+                                <input type="text" class="form-control" id="cuisine" name="cuisine" value="{{ request.form['cuisine'] or '' }}" placeholder="e.g. Italian, Vegan...">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary btn-block" value="Generate Itinerary">
@@ -39,13 +46,26 @@
                         </form>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Itinerary Output Column -->
+            <div class="col-md-6">
                 {% if itinerary %}
-                <div class="card mt-4">
+                <div class="card">
                     <div class="card-header">
                         Your Custom Itinerary
                     </div>
                     <div class="card-body">
-                        <p>{{ itinerary }}</p>
+                        {% for day, content in itinerary.items() %}
+                            <h5 class="card-title">{{ day }}</h5>
+                            <p>
+                                <span class="underlined">Morning:</span> {{ content.morning }}
+                            </p>
+                            <p>
+                                <span class="underlined">Afternoon:</span> {{ content.afternoon }}
+                            </p>
+                            <hr>
+                        {% endfor %}
                     </div>
                 </div>
                 {% endif %}
