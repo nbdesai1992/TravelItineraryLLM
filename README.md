@@ -6,7 +6,7 @@ This is a Flask-based web application that uses the OpenAI GPT-3.5 model to gene
 
 1. Clone the repository:
 
-\```bash
+\```
 git clone https://github.com/yourusername/travel-itinerary-generator.git
 cd travel-itinerary-generator
 \```
